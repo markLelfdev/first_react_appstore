@@ -1,0 +1,37 @@
+ /* src/components/css/ProductCard.module.css */
+@import "@fontsource/itim"; /* นำเข้าฟอนต์ Itim */
+
+.productCard {
+  /* background-color: #fff; */
+  /* color: #000; */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  width: calc(25% - 20px); /* ความกว้างของการ์ด */
+  box-sizing: border-box;
+  text-align: center;
+  font-family: 'Itim', cursive; /* ใช้ฟอนต์ Itim */
+  margin-bottom: 20px;
+}
+
+.productImage {
+  width: 100%;
+  height: 220px;
+}
+
+.productName {
+  font-size: 1.2em; /* ใช้ขนาดฟอนต์ที่เหมาะสม */
+  margin: 10px 0;
+}
+
+.productPrice, .productStock, .productCategory, .productDescription {
+  font-size: 1em; /* ใช้ขนาดฟอนต์ที่เหมาะสม */
+}
+
+.cartSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}

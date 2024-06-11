@@ -1,0 +1,38 @@
+/* src/pages/Shop.module.css */
+.shopContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--background-color);
+
+    /* color: white; เปลี่ยนสีตัวอักษรตามต้องการ */
+  }
+  
+  .productsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 20px;
+    max-width: 1200px; /* กำหนดความกว้างสูงสุดของคอนเทนเนอร์ */
+    
+  }
+  
+  .productCard {
+    /* background-color: #fff; */
+    /* color: #000; */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    width: calc(25% - 20px); /* ความกว้างของการ์ด */
+    box-sizing: border-box;
+    background-color: var(--card-background-color);
+
+  }
+  
+  h1 {
+    margin-bottom: 20px;
+  }
+  
