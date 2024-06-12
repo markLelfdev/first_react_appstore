@@ -1,5 +1,5 @@
 import express from 'express';
-import db from './db.js';
+import db from '../db.js';
 const router = express.Router();
 /* ↓ Show data  */
 // all product  
@@ -39,7 +39,7 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
     const { id } = req.params;
     const { name, price, category, stock, description, image_url } = req.body;
-    console.log(`Received PUT request for id ${id} with data: `, req.body);
+    // console.log(`Received PUT request for id ${id} with data: `, req.body);
     try {
         const updatedProduct = await db.one(
             'UPDATE products SET name = $1, price = $2, category = $3, stock = $4, description = $5, image_url = $6 WHERE id = $7 RETURNING *', 
@@ -50,5 +50,15 @@ router.put('/:id', async (req, res) => {
     }
 });
 
-export default router;
+/* ↓ Delete Product  */
+router.delete('/:id', async (req, res) => {
+    const {id} = req.params;
+    try{
+        const deletedProduct = await db.one('DELETE FROM products WHERE id = $1 RETURNING *', [id]);
+        res.json(deletedProduct);
+    } catch (err) {
+        res.status(500).json({error: err.message});
+    }
+});
 
+export default router;
