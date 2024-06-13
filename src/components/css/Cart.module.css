@@ -1,0 +1,19 @@
+@import "@fontsource/itim"; /* นำเข้าฟอนต์ Itim */
+
+.productCard {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    width: calc(25% - 20px); /* ความกว้างของการ์ด */
+    box-sizing: border-box;
+    text-align: center;
+    font-family: 'Itim', cursive; /* ใช้ฟอนต์ Itim */
+    margin-bottom: 20px;
+    background-color: var(--background-color);
+    
+  }
+.productImage {
+    width: 100px;
+    height: 100px;
+  }

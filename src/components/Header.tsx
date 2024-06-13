@@ -13,9 +13,9 @@ const Header: React.FC = () => {
       <div className={styles.nav}>
         <div className={styles.cart}>
           <Link to="/cart">
-            <ShoppingCartIcon style={{ marginRight: "5px" }} />
-            <span>Cart</span>
+            <ShoppingCartIcon />
           </Link>
+          <span>Cart</span>
         </div>
         <div className={styles.profile}>
           <Person4Icon style={{ marginRight: "5px" }} />

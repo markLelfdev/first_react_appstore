@@ -1,7 +1,6 @@
 import express from 'express';
 import db from '../db.js';
 const router = express.Router();
-
 // สร้างตะกร้า
 router.post('/',async(req,res)=> {
     const {userid} = req.body;
@@ -23,7 +22,6 @@ router.post('/',async(req,res)=> {
                 [userid]
             );
         res.status(201).json(result);
-
         }
     }catch(err){
         res.status(500).json({error: err.message});
@@ -31,18 +29,23 @@ router.post('/',async(req,res)=> {
 });
 
 // เพิ่มสินค้าในตะกร้า
-router.post('/:cartid/items',async(req,res)=>{
-    const {CartID} = req.params;
-    const {ProductID, Quantity} = req.body;
-    try{
+router.post('/:cartid/items', async (req, res) => {
+    const { cartid } = req.params;
+    const { productid, quantity } = req.body;
+    try {
+            // ตรวจสอบว่า quantity มีค่าและไม่ใช่ null
+        if (typeof quantity !== 'number' || quantity <= 0) {
+            return res.status(400).json({ error: 'Invalid quantity' });
+        }
         const result = await db.one(
-            'INSERT INTO public.cartitems( cartid, productid, quantity) VALUES ($1,$2,$3) RETURNING itemid'
-            [CartID],[ProductID],[Quantity]
+            'INSERT INTO public.cartitems(cartid, productid, quantity) VALUES ($1, $2, $3) RETURNING cartitemid',
+            [cartid, productid, quantity]
         );
         res.status(201).json(result);
-    }catch(err){
-        res.status(500).json({error: err.message});
+    } catch (err) {
+        res.status(500).json({ error: err.message });
     }
 });
+
 
 export default router;
