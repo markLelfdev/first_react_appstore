@@ -1,7 +1,7 @@
 // src/pages/Shop.tsx
 import React, { useState, useEffect } from 'react';
 import Productcard from "../components/ProductCard";
-import styles from "../components/css/Shop.module.css";
+import styles from "../css/Shop.module.css";
 
 interface Product {
   id: number;

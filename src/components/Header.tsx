@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./css/Header.module.css";
+import styles from "../css/Header.module.css";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Person4Icon from "@mui/icons-material/Person4";
 import { Link } from "react-router-dom";

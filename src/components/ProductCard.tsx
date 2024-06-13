@@ -1,6 +1,6 @@
 // src/components/Productcard.tsx
 import React, { useState } from "react";
-import styles from "./css/ProductCard.module.css";
+import styles from "../css/ProductCard.module.css";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import IconButton from '@mui/material/IconButton';
 import TextField from '@mui/material/TextField';
