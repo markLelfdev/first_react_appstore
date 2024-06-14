@@ -8,13 +8,13 @@
   /* color: rgba(43, 71, 228, 0.87); */
   color: var(--text-color);
 
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   
   --background-color: #F8F4E1;
+  --background-header: #987070;
   --header-color: #D4B183;
   --card-background-color: #C4A379;
   --text-color: #67421D;

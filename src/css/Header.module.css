@@ -4,12 +4,16 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
+    padding: 10px 5px;
     border-bottom: 1px solid #ccc;
     width: 100%;
     box-sizing: border-box;
     font-family: 'Itim', cursive;
-
+    position: fixed;
+    top: 0;
+    background-color: var(--background-header);
+    height: 75px;
+    z-index: 999;
   }
   
   .logo {
