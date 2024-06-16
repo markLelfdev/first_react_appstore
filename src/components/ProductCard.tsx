@@ -6,7 +6,6 @@ import IconButton from '@mui/material/IconButton';
 import TextField from '@mui/material/TextField';
 import { useCart } from '../context/Cartcontext';
 
-
 interface ProductcardProps {
   id: number;
   name: string;
