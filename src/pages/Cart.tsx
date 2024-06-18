@@ -4,10 +4,18 @@ import { useCart } from "../context/Cartcontext";
 import styles from "../css/Cart.module.css";
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
+import AddBoxIcon from "@mui/icons-material/AddBox";
+import RemoveIcon from "@mui/icons-material/Remove";
 
 const Cart: React.FC = () => {
   const { cartItems, increaseQuantity, decreaseQuantity, deleteItem } =
     useCart();
+
+  const calprice = () => {
+    return cartItems
+      .reduce((total, item) => total + item.price * item.qty, 0)
+      .toFixed(2);
+  };
 
   return (
     <div className={styles.container}>
@@ -38,11 +46,22 @@ const Cart: React.FC = () => {
                     }
                   </td>
                   <td>{item.name}</td>
-                  <td>{item.price} ฿</td>
-                  <td>{item.qty}</td>
+                  <td className={styles.cart_table_Price}>
+                    {" "}
+                    {Number(item.price).toFixed(2)} ฿
+                  </td>
                   <td>
-                    <button onClick={() => decreaseQuantity(item.id)}>-</button>
-                    <button onClick={() => increaseQuantity(item.id)}>+</button>
+                    <IconButton onClick={() => decreaseQuantity(item.id)}>
+                      <RemoveIcon />
+                    </IconButton>
+
+                    {item.qty}
+
+                    <IconButton onClick={() => increaseQuantity(item.id)}>
+                      <AddBoxIcon />
+                    </IconButton>
+                  </td>
+                  <td>
                     <IconButton
                       aria-label="delete"
                       size="large"
@@ -53,6 +72,13 @@ const Cart: React.FC = () => {
                   </td>
                 </tr>
               ))}
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Total : </td>
+                <td>{calprice()} ฿ </td>
+              </tr>
             </tbody>
           </table>
         )}

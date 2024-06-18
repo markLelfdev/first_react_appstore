@@ -1,6 +1,9 @@
 import express from 'express';
+import bcrypt from 'bcrypt';
 import db from '../db.js'; // Assuming you have a db.js file to handle the connection
 const router = express.Router();
+
+const saltRounds = 10;
 
 /* ↓ Register User */
 router.post('/register', async (req, res) => {
@@ -12,6 +15,9 @@ router.post('/register', async (req, res) => {
     }
 
     try {
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
+        console.log("Hashed password:", hashedPassword); // Debug log
+
         await client.query('BEGIN'); // Begin transaction
         console.log("Transaction started"); // Debug log
         // Insert into user_details table and get the id
@@ -20,7 +26,7 @@ router.post('/register', async (req, res) => {
         const userDetailResult = await client.query(userDetailQuery, userDetailValues);
         const userDetailId = userDetailResult[0].id;
         const userAuthQuery = 'INSERT INTO public.user_auth (password, level, data_personal, user_name) VALUES ($1, $2, $3, $4)';
-        const userAuthValues = [password, lvl, userDetailId, username];
+        const userAuthValues = [hashedPassword, lvl, userDetailId, username];
         const userAuthResult = await client.query(userAuthQuery, userAuthValues);
         // console.log("userAuthResult:", userAuthResult); // Debug log
         
@@ -36,4 +42,21 @@ router.post('/register', async (req, res) => {
     } 
 });
 
+router.post('/login', async (req, res) => {
+    const {username, password} = req.body;
+    try{
+        const user = await db.oneOrNone('SELECT * FROM public.user_auth WHERE user_name = $1', [username]);
+        if(user == null){
+            return res.status(404).send('User not found');
+        }
+        const match = await bcrypt.compare(password, user.password)
+        if (match){
+            res.status(200).json(user);
+        }else{
+            res.status(401).json({error: 'Invalid password'});
+        }
+    }catch(e){
+        res.status(500).json({error: e.message});
+    }
+});
 export default router;
